@@ -31,16 +31,7 @@ const BtnContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-const ToDoCards = ({ mapItem, toDo, setToDo, children }) => {
-  const deleteToDoCard = () => {
-    let copy = [...toDo];
-    setToDo(copy.filter((item) => mapItem.id !== item.id));
-  };
-  const changeStateIsDone = () => {
-    let copy = [...toDo];
-    mapItem.isDone = mapItem.isDone ? false : true;
-    setToDo(copy.map((item) => (item.id === mapItem.id ? mapItem : item)));
-  };
+const ToDoCards = ({ mapItem, children }) => {
   return (
     <ToDoCard>
       <div>
@@ -48,8 +39,8 @@ const ToDoCards = ({ mapItem, toDo, setToDo, children }) => {
         <CardText toDoComment>{mapItem.comment}</CardText>
       </div>
       <BtnContainer>
-        <CardBtn onClick={deleteToDoCard}>삭제</CardBtn>
-        <CardBtn doneBg doneColor onClick={changeStateIsDone}>
+        <CardBtn>삭제</CardBtn>
+        <CardBtn doneBg doneColor>
           {children}
         </CardBtn>
       </BtnContainer>

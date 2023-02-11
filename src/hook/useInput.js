@@ -1,12 +1,16 @@
 import { useState, useCallback } from 'react';
 
-const useInput = (intivalValue) => {
-  const [state, setState] = useState({ title: '', comment: '' });
-  const setStateHandler = useCallback((event) => {
-    const { name, value } = event.target;
+const useInput = (initialValue) => {
+  const [state, setState] = useState(initialValue);
+
+  const setStateHandler = useCallback((e) => {
+    const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   }, []);
-  const reset = useCallback(() => setState(intivalValue), [intivalValue]);
+
+  const reset = () => {
+    setState(initialValue);
+  };
   return [state, setStateHandler, reset];
 };
 

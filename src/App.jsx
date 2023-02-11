@@ -2,7 +2,6 @@ import AddInput from './components/AddInput';
 import ToDoList from './components/ToDoList';
 
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const AppContainer = styled.div`
   max-width: 1200px;
@@ -35,11 +34,6 @@ const ToDoListContainer = styled.div`
 `;
 
 const App = () => {
-  let [toDo, setToDo] = useState([
-    { id: 0, title: '리액트공부하기', comment: '리액트 기초를 공부해봅시다.', isDone: false },
-    { id: 1, title: '항해99', comment: 'todolist 만들기', isDone: true },
-  ]);
-
   return (
     <AppContainer>
       <Header>
@@ -47,14 +41,10 @@ const App = () => {
         <h3>React</h3>
       </Header>
       <main>
-        <AddInput toDo={toDo} setToDo={setToDo}></AddInput>
+        <AddInput></AddInput>
         <ToDoListContainer>
-          <ToDoList toDo={toDo} setToDo={setToDo} isDone={false}>
-            Work.. 🔥
-          </ToDoList>
-          <ToDoList toDo={toDo} setToDo={setToDo} isDone={true}>
-            Done.. 🎉
-          </ToDoList>
+          <ToDoList isDone={false}>Work.. 🔥</ToDoList>
+          <ToDoList isDone={true}>Done.. 🎉</ToDoList>
         </ToDoListContainer>
       </main>
     </AppContainer>

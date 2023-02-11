@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { useEffect, useRef } from 'react';
 import useInput from '../hook/useInput';
 
+import { useDispatch } from 'react-redux';
+import { addToDo } from '../redux/modules/toDos';
+
 const FormContainer = styled.form`
   display: flex;
   align-items: center;
@@ -51,35 +54,39 @@ const ToDoSubmitBtn = styled.button`
   font-size: 15px;
 `;
 
-const AddInput = ({ toDo, setToDo }) => {
-  let [toDoText, setToDoText, resetToDoText] = useInput({ title: '', comment: '' });
+const AddInput = () => {
+  let [{ title, comment }, setToDoText, resetInput] = useInput({ title: '', comment: '' });
+
+  const dispatch = useDispatch();
+
+  const addToDoText = (paload) => {
+    dispatch(addToDo(paload));
+  };
 
   const postRequest = (event) => {
     event.preventDefault();
-    if (toDoText.title === '') {
+    if (title === '') {
       return alert('To Do는 입력해주세요 😉');
     }
-    let copy = [{ id: Date.now(), title: toDoText.title, comment: toDoText.comment, isDone: false }, ...toDo];
-    setToDo(copy);
-    resetToDoText();
+    addToDoText({ id: Date.now(), title, comment, isDone: false });
+    resetInput();
   };
 
   const inputRef = useRef();
-
   useEffect(() => {
     inputRef.current.focus();
-  }, [toDoText.title]);
+  }, [title]);
 
   return (
     <>
       <FormContainer action="/" onSubmit={postRequest}>
         <InputContainer>
           <InputHead>To Do</InputHead>
-          <ToDoInput ref={inputRef} onChange={setToDoText} value={toDoText.title} name="title" placeholder="할 일을 입력하세요"></ToDoInput>
+          <ToDoInput ref={inputRef} onChange={setToDoText} value={title} name="title" placeholder="할 일을 입력하세요"></ToDoInput>
         </InputContainer>
         <InputContainer>
           <InputHead>Comment</InputHead>
-          <ToDoInput onChange={setToDoText} value={toDoText.comment} name="comment" placeholder="내용을 입력하세요"></ToDoInput>
+          <ToDoInput onChange={setToDoText} value={comment} name="comment" placeholder="내용을 입력하세요"></ToDoInput>
         </InputContainer>
         <ToDoSubmitBtn>등록</ToDoSubmitBtn>
       </FormContainer>
