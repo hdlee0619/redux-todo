@@ -25,7 +25,7 @@ const toDos = (state = initialState, action) => {
     case 'src/AddInput/ADD_TO_DO':
       return [action.payload, ...state];
     case 'src/AddInput/DELETE_TO_DO':
-      return;
+      return state.filter((item) => item.id !== action.payload);
     default:
       return state;
   }

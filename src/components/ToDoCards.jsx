@@ -1,4 +1,6 @@
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { deleteToDo } from '../redux/modules/toDos';
 
 const ToDoCard = styled.div`
   display: flex;
@@ -32,6 +34,12 @@ const BtnContainer = styled.div`
 `;
 
 const ToDoCards = ({ mapItem, children }) => {
+  const dispatch = useDispatch();
+
+  const deleteToDoCard = (payload) => {
+    dispatch(deleteToDo(payload));
+  };
+
   return (
     <ToDoCard>
       <div>
@@ -39,7 +47,7 @@ const ToDoCards = ({ mapItem, children }) => {
         <CardText toDoComment>{mapItem.comment}</CardText>
       </div>
       <BtnContainer>
-        <CardBtn>삭제</CardBtn>
+        <CardBtn onClick={() => deleteToDoCard(mapItem.id)}>삭제</CardBtn>
         <CardBtn doneBg doneColor>
           {children}
         </CardBtn>
