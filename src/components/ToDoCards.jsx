@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { deleteToDo, updateToDo } from '../redux/modules/toDos.js';
+import { deleteToDo, updateToDo } from '../redux/modules/todos.js';
 
 const ToDoCard = styled.div`
   display: flex;

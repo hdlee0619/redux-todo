@@ -28,7 +28,7 @@ export const updateToDo = (payload) => {
   };
 };
 
-const toDos = (state = initialState, action) => {
+const todos = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_DO:
       return [action.payload, ...state];
@@ -42,4 +42,4 @@ const toDos = (state = initialState, action) => {
   }
 };
 
-export default toDos;
+export default todos;

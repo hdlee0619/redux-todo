@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import useInput from '../hook/useInput';
 
 import { useDispatch } from 'react-redux';
-import { addToDo } from '../redux/modules/toDos.js';
+import { addToDo } from '../redux/modules/todos.js';
 
 const FormContainer = styled.form`
   display: flex;
