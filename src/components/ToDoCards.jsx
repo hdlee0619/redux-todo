@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { deleteToDo } from '../redux/modules/toDos';
+import { deleteToDo, updateToDo } from '../redux/modules/toDos';
 
 const ToDoCard = styled.div`
   display: flex;
@@ -40,6 +40,10 @@ const ToDoCards = ({ mapItem, children }) => {
     dispatch(deleteToDo(payload));
   };
 
+  const updateToDoState = (payload) => {
+    dispatch(updateToDo(payload));
+  };
+
   return (
     <ToDoCard>
       <div>
@@ -48,7 +52,7 @@ const ToDoCards = ({ mapItem, children }) => {
       </div>
       <BtnContainer>
         <CardBtn onClick={() => deleteToDoCard(mapItem.id)}>삭제</CardBtn>
-        <CardBtn doneBg doneColor>
+        <CardBtn doneBg doneColor onClick={() => updateToDoState(mapItem)}>
           {children}
         </CardBtn>
       </BtnContainer>

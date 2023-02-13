@@ -4,7 +4,8 @@ const initialState = [
 ];
 
 const ADD_TO_DO = 'src/AddInput/ADD_TO_DO';
-const DELETE_TO_DO = 'src/AddInput/DELETE_TO_DO';
+const DELETE_TO_DO = 'src/ToDoCards/DELETE_TO_DO';
+const UPDATE_TO_DO = 'src/ToDoCards/UPDATE_TO_DO';
 
 export const addToDo = (payload) => {
   return {
@@ -20,12 +21,22 @@ export const deleteToDo = (payload) => {
   };
 };
 
+export const updateToDo = (payload) => {
+  return {
+    type: UPDATE_TO_DO,
+    payload: payload,
+  };
+};
+
 const toDos = (state = initialState, action) => {
   switch (action.type) {
-    case 'src/AddInput/ADD_TO_DO':
+    case ADD_TO_DO:
       return [action.payload, ...state];
-    case 'src/AddInput/DELETE_TO_DO':
+    case DELETE_TO_DO:
       return state.filter((item) => item.id !== action.payload);
+    case UPDATE_TO_DO:
+      action.payload.isDone = !action.payload.isDone;
+      return state.map((item) => (item.id === action.payload.id ? action.payload : item));
     default:
       return state;
   }
