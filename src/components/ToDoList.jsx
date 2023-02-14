@@ -17,8 +17,9 @@ const List = ({ children, isDone }) => {
   const toDoList = useSelector((state) => {
     return state.toDos;
   });
+  console.log(toDoList);
   return (
-    <>
+    <div>
       <ToDoTitle>{children}</ToDoTitle>
       <ToDoCardContainer>
         {toDoList
@@ -31,7 +32,7 @@ const List = ({ children, isDone }) => {
             );
           })}
       </ToDoCardContainer>
-    </>
+    </div>
   );
 };
 

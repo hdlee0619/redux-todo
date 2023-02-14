@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { deleteToDo, updateToDo } from '../redux/modules/todos.js';
+import { useNavigate } from 'react-router-dom';
 
 const ToDoCard = styled.div`
   display: flex;
@@ -13,6 +14,9 @@ const ToDoCard = styled.div`
   background-color: #e3caa5;
   border-radius: 20px;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  & :hover {
+    cursor: pointer;
+  }
 `;
 
 const CardText = styled.h4`
@@ -44,8 +48,10 @@ const ToDoCards = ({ mapItem, children }) => {
     dispatch(updateToDo(payload));
   };
 
+  const navigate = useNavigate();
+
   return (
-    <ToDoCard>
+    <ToDoCard onClick={() => navigate(`/about/${mapItem.id}`)}>
       <div>
         <CardText>{mapItem.title}</CardText>
         <CardText toDoComment>{mapItem.comment}</CardText>
