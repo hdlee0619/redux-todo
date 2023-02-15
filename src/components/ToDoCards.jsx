@@ -38,6 +38,8 @@ const BtnContainer = styled.div`
 `;
 
 const ToDoCards = ({ mapItem, children }) => {
+  console.log('ToDoCards mapItem', mapItem);
+  console.log('ToDoCards mapItem mapItem', mapItem.id);
   const dispatch = useDispatch();
 
   const deleteToDoCard = (payload) => {
@@ -51,8 +53,8 @@ const ToDoCards = ({ mapItem, children }) => {
   const navigate = useNavigate();
 
   return (
-    <ToDoCard onClick={() => navigate(`/about/${mapItem.id}`)}>
-      <div>
+    <ToDoCard>
+      <div onClick={() => navigate(`/about/${mapItem.id}`)}>
         <CardText>{mapItem.title}</CardText>
         <CardText toDoComment>{mapItem.comment}</CardText>
       </div>
