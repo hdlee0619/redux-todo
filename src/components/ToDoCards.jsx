@@ -38,8 +38,6 @@ const BtnContainer = styled.div`
 `;
 
 const ToDoCards = ({ mapItem, children }) => {
-  console.log('ToDoCards mapItem', mapItem);
-  console.log('ToDoCards mapItem mapItem', mapItem.id);
   const dispatch = useDispatch();
 
   const deleteToDoCard = (payload) => {
